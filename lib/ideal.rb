@@ -1,6 +1,6 @@
 # encoding: utf-8
 
-require 'rest'
+require 'restclient'
 require 'nokogiri'
 require 'xmldsig'
 

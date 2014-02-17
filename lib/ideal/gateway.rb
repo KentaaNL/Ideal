@@ -254,13 +254,11 @@ module Ideal
       log('URL', url)
       log('Request', body)
 
-      response = REST.post(url, body, {
-        'Content-Type' => 'application/xml; charset=utf-8'
-      }, {
-        :tls_verify      => true,
-        :tls_key         => self.class.private_key,
-        :tls_certificate => self.class.private_certificate
-      })
+      client = RestClient::Resource.new(url,
+        :ssl_client_cert => self.class.private_certificate,
+        :ssl_client_key => self.class.private_key,
+        :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
+      response = client.post(body, { 'Content-Type' => 'application/xml; charset=utf-8' })
 
       log('Response', response.body)
       response.body
