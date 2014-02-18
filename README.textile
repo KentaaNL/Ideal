@@ -34,11 +34,6 @@ Or you can add it as a dependency in your Gemfile.
 
 <pre><code>gem 'ideal'</code></pre>
 
-Finally, if you don't dig any of that gemming that's so popular nowadays, you can install it as a plugin;
-
-<pre><code>cd vendor/plugins
-git clone --depth 1 git://github.com/Mobillion/Ideal.git ideal</code></pre>
-
 h2. Generate private keys and certificates
 
 Messages between you and the acquirer are all signed in order to prove their authenticity. You will need a certificate for your side, this can be self-issued. If you like spending money, you can buy a certificate from some SSL authority. The certificate of the acquirer is probably hidden somewhere in plain sight in their documentation.
