@@ -1,7 +1,5 @@
 h1. iDEAL
 
-"!https://secure.travis-ci.org/Fingertips/Ideal.png!":http://travis-ci.org/Fingertips/Ideal
-
 Library for the "iDEAL":http://www.ideal.nl payment standard.
 
 h2. What is iDEAL?
@@ -22,11 +20,11 @@ In order to use iDEAL you will need to get an iDEAL merchant account from your b
   * Rabobank: Rabo iDEAL Professional.
   * SNS Bank: "Not yet available":http://www.snsbank.nl/zakelijk/betalingsverkeer/kan-ik-ideal-gebruiken-voor-mijn-webwinkel.html
 
-Note that this implementation was started a few years ago. As a result we only support version 2 or the iDEAL protocol, in some cases it might be necessary to configure this in your iDEAL backend or use a different set of API credentials.
+Note that this implementation was started a few years ago. This library support iDEAL version 3.3.1.
 
 h2. Install
 
-The iDEAL gem does not have any large external dependencies. It depends on Nap (a small HTTP library) and Builder (for building XML files). Because of these minor dependencies it's suited to use in Ruby projects other than Ruby on Rails.
+The iDEAL gem does not have any large external dependencies. It depends on RestClient (a simple HTTP/REST library), Nokogiri (for building XML files) and xmldsig. Because of these minor dependencies it's suited to use in Ruby projects other than Ruby on Rails.
 
 The easiest way to install is as a gem.
 
@@ -39,7 +37,7 @@ Or you can add it as a dependency in your Gemfile.
 Finally, if you don't dig any of that gemming that's so popular nowadays, you can install it as a plugin;
 
 <pre><code>cd vendor/plugins
-git clone --depth 1 git://github.com/Fingertips/Ideal.git ideal</code></pre>
+git clone --depth 1 git://github.com/Mobillion/Ideal.git ideal</code></pre>
 
 h2. Generate private keys and certificates
 
@@ -47,8 +45,8 @@ Messages between you and the acquirer are all signed in order to prove their aut
 
 To create a self-signed certificate follow these steps:
 
-* /usr/bin/openssl genrsa -des3 -out private_key.pem -passout pass:the_passphrase 1024
-* /usr/bin/openssl req -x509 -new -key private_key.pem -passin pass:the_passphrase -days 3650 -out private_certificate.cer
+* /usr/bin/openssl genrsa -aes128 -out private_key.pem -passout pass:the_passphrase 2048
+* /usr/bin/openssl req -x509 -sha256 -new -key private_key.pem -passin pass:the_passphrase -days 1825 -out private_certificate.cer
 
 Substitute _the_passphrase_ with your own passphrase. You will need to configure that passphrase later on, so hand on to it.
 
@@ -62,7 +60,7 @@ h2. Test and activation
 
 Once you've uploaded the certificate you need to initiate a number of transactions to complete the activation process. Luckily these transactions are part of the remote test for the gem. It's still kind of a pain, but here we go!
 
-<pre><code>git clone --depth 1 git://github.com/Fingertips/Ideal.git ideal
+<pre><code>git clone --depth 1 git://github.com/Mobillion/Ideal.git ideal
 cd ideal
 bundle install</code></pre>
 
@@ -231,7 +229,7 @@ end
 
 h2. Help out!
 
-If you find anything wrong with the gem, we would love to hear from you. Please "create an issue with a patch":https://github.com/Fingertips/iDeal/issues if you run into anything.
+If you find anything wrong with the gem, we would love to hear from you. Please "create an issue with a patch":https://github.com/Mobillion/iDeal/issues if you run into anything.
 
 h2. History
 
