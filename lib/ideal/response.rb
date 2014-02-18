@@ -165,7 +165,7 @@ module Ideal
     end
 
     def error_occured?
-      @document.root.name == 'ErrorRes'
+      @document.root.name == 'ErrorRes' || @document.root.name == 'AcquirerErrorRes'
     end
 
     def text(path)
